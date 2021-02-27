@@ -5,11 +5,11 @@
 | ------------------- | ------- | ------------------------- |
 | nickname            | string  | null: false, unique: true |
 | email               | string  | null: false, unique: true |
-| encrypted_password  | string  | null: false, unique: true |
+| encrypted_password  | string  | null: false               |
 | last_name           | string  | null: false               |
 | first_name          | string  | null: false               |
-| last_name_ruby      | string  | null: false               |
-| last_name_ruby      | string  | null: false               |
+| last_name_kana      | string  | null: false               |
+| last_name_kana      | string  | null: false               |
 | birthday            | date    | null: false               |
 
 ### Association
@@ -20,9 +20,9 @@
 ## items テーブル
 | Column          | Type       | Options                        |
 | ----------------| -----------| -------------------------------|
-| item_name       | string     | null: false                    |
+| name            | string     | null: false                    |
 | description     | text       | null: false                    |
-| category        | integer    | null: false                    |
+| category_id     | integer    | null: false                    |
 | status_id       | integer    | null: false                    |
 | delivery_fee_id | integer    | null: false                    |
 | area_id         | integer    | null: false                    |
@@ -58,7 +58,7 @@
 | address       | string     | null: false                    |
 | building_name | string     |                                |
 | phone_number  | string     | null: false                    |
-| purchasers    | references | null: false, foreign_key: true |
+| purchaser     | references | null: false, foreign_key: true |
 
 ### Association
 
