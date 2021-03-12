@@ -43,7 +43,7 @@ RSpec.describe Item, type: :model do
       end
 
       it 'カテゴリーの情報が空の時、出品できない'do
-        @item.category_id  = '1'
+        @item.category_id  = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Category must be other than 1")
       end
@@ -55,7 +55,7 @@ RSpec.describe Item, type: :model do
       end
 
       it '商品の状態の情報が空の時、出品できない'do
-        @item.status_id  = '1'
+        @item.status_id  = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Status must be other than 1")
       end
@@ -67,7 +67,7 @@ RSpec.describe Item, type: :model do
       end
 
       it '配送料の負担の情報が空の時、出品できない'do
-        @item.delivery_fee_id  = '1'
+        @item.delivery_fee_id  = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Delivery fee must be other than 1")
       end
@@ -79,7 +79,7 @@ RSpec.describe Item, type: :model do
       end
 
       it '発送元の地域が空の時、出品できない'do
-        @item.area_id  = '1'
+        @item.area_id  = 1
         @item.valid?
         expect(@item.errors.full_messages).to include("Area must be other than 1")
       end
@@ -91,7 +91,7 @@ RSpec.describe Item, type: :model do
       end
 
       it '発送までの日数が空の時、出品できない'do
-      @item.day_id  = '1'
+      @item.day_id  = 1
       @item.valid?
       expect(@item.errors.full_messages).to include("Day must be other than 1")
       end
