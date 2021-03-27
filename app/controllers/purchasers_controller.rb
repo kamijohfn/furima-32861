@@ -10,7 +10,6 @@ class PurchasersController < ApplicationController
   def create
     @purchaser_delivery = PurchaserDelivery.new(purchaser_params)
     if  @purchaser_delivery.valid? 
-        binding.pry
         Payjp.api_key = ENV["PAYJP_SECRET_KEY"] 
         Payjp::Charge.create(
         amount: Item.find(params[:item_id]).price,
