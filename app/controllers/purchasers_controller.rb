@@ -1,4 +1,8 @@
 class PurchasersController < ApplicationController
+  before_action :authenticate_user!
+  before_action :sold_root_path
+  before_action :move_to_root_path 
+
   def index
     @purchaser_delivery = PurchaserDelivery.new
   end
@@ -23,6 +27,18 @@ class PurchasersController < ApplicationController
   private
   def purchaser_params
     params.require(:purchaser_delivery).permit(:postal_code, :area_id, :municipality, :address, :building_name, :phone_number).merge(token: params[:token], user_id: current_user.id, item_id: params[:item_id])
+  end
+
+  def move_to_root_path
+    if current_user.id == Item.find(params[:item_id]).user_id
+      redirect_to root_path
+    end
+  end
+
+  def sold_root_path
+    if Item.find(params[:item_id]).purchaser.present?
+      redirect_to root_path
+    end
   end
 
 

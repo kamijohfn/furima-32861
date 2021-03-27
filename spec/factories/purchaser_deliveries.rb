@@ -5,5 +5,6 @@ FactoryBot.define do
     municipality { '緑区' }
     address { '青山1-1' }
     phone_number       {Faker::Number.number(digits: 11)}
+    token {"tok_abcdefghijk00000000000000000"}
   end
 end
