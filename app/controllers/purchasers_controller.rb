@@ -1,5 +1,6 @@
 class PurchasersController < ApplicationController
   before_action :authenticate_user!
+  before_action :item_find
   before_action :sold_root_path
   before_action :move_to_root_path 
 
@@ -12,7 +13,7 @@ class PurchasersController < ApplicationController
     if  @purchaser_delivery.valid? 
         Payjp.api_key = ENV["PAYJP_SECRET_KEY"] 
         Payjp::Charge.create(
-        amount: Item.find(params[:item_id]).price,
+        amount: @item_id.price,
         card: purchaser_params[:token], 
         currency: 'jpy'
       )
@@ -28,14 +29,18 @@ class PurchasersController < ApplicationController
     params.require(:purchaser_delivery).permit(:postal_code, :area_id, :municipality, :address, :building_name, :phone_number).merge(token: params[:token], user_id: current_user.id, item_id: params[:item_id])
   end
 
+  def item_find
+    @item_id = Item.find(params[:item_id])
+  end
+
   def move_to_root_path
-    if current_user.id == Item.find(params[:item_id]).user_id
+    if current_user.id == @item_id.user_id
       redirect_to root_path
     end
   end
 
   def sold_root_path
-    if Item.find(params[:item_id]).purchaser.present?
+    if @item_id.purchaser.present?
       redirect_to root_path
     end
   end

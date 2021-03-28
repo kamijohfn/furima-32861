@@ -7,14 +7,14 @@
     </h1>
     <%# 購入内容の表示 %>
     <div class='buy-item-info'>
-      <%= image_tag Item.find(params[:item_id]).image, class: 'buy-item-img' %>
+      <%= image_tag @item_id.image, class: 'buy-item-img' %>
       <div class='buy-item-right-content'>
         <h2 class='buy-item-text'>
-          <%= Item.find(params[:item_id]).name %> 
+          <%= @item_id.name %> 
         </h2>
         <div class='buy-item-price'>
-          <p class='item-price-text'>¥<%= Item.find(params[:item_id]).price %></p>
-          <p class='item-price-sub-text'><%= Item.find(params[:item_id]).delivery_fee.name %></p>
+          <p class='item-price-text'>¥<%= @item_id.price %></p>
+          <p class='item-price-sub-text'><%= @item_id.delivery_fee.name %></p>
         </div>
       </div>
     </div>
@@ -26,7 +26,7 @@
         支払金額
       </h1>
       <p class='item-payment-price'>
-        ¥<%= Item.find(params[:item_id]).price %>
+        ¥<%= @item_id.price %>
       </p>
     </div>
     <%# /支払額の表示 %>
