@@ -1,7 +1,6 @@
 class PurchasersController < ApplicationController
   before_action :authenticate_user!
   before_action :item_find
-  before_action :sold_root_path
   before_action :move_to_root_path 
 
   def index
@@ -34,16 +33,9 @@ class PurchasersController < ApplicationController
   end
 
   def move_to_root_path
-    if current_user.id == @item_id.user_id
+    if current_user.id == @item_id.user_id || @item_id.purchaser.present?
       redirect_to root_path
     end
   end
-
-  def sold_root_path
-    if @item_id.purchaser.present?
-      redirect_to root_path
-    end
-  end
-
 
 end
